@@ -1,0 +1,15 @@
+{
+  "name": "mnist",
+  "version": "1.0.0",
+  "description": "my first mnist",
+  "main": "mnist_from_scratch.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mathjs": "^14.6.0",
+    "mnist": "^1.1.0"
+  }
+}
