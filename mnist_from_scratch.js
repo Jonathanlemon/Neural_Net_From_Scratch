@@ -278,15 +278,24 @@ function export_inputs_to_json(filename) {
   // Make an array to hold multiple entries
   const jsonData = [];
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 100; i++) {
     jsonData.push({
       input: trainingData[i].input,   // the 784-length array
-      digit: trainingData[i].output   // the corresponding label/output array
+      digit: trainingData[i].output.indexOf(math.max(math.matrix(trainingData[i].output)))   // the corresponding label/output array
     });
+  }
+  function jsonWithSingleLineInput(data) {
+    return JSON.stringify(data, (key, value) => {
+      if (key === "input" && Array.isArray(value)) {
+        // Convert input array to a string that stays on one line
+        return '['+value.join(", ")+']';
+      }
+      return value;
+    }, 2)
   }
 
   // Write the array of objects to a JSON file
-  fs.writeFileSync(filename, JSON.stringify(jsonData, null, 2));
+  fs.writeFileSync(filename, jsonWithSingleLineInput(jsonData));
 }
 
 
@@ -294,5 +303,4 @@ init();
 //make_prediction(1, 0);
 //learn(5);
 //export_to_json("pretrained-model.json");
-
 export_inputs_to_json("sample_grayscales.json");
