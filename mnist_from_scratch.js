@@ -10,7 +10,7 @@ const hiddenSize2 = 64;   // second hidden layer
 const outputSize = 10;    // digits 0–9
 
 function init() {
-  const { training, test } = mnist.set(10000, 2000);
+  const { training, test } = mnist.set(13000, 3000);
 
   // Save data globally
   global.trainingData = (training);
@@ -155,7 +155,7 @@ function resetGradients() {
 }
 
 function learn(epochs) {
-  let batchSize = 64;
+  let batchSize = 100;
 
   for (let e = 0; e < epochs; e++) {
     shuffle(trainingData);
@@ -301,6 +301,6 @@ function export_inputs_to_json(filename) {
 
 init();
 //make_prediction(1, 0);
-//learn(5);
-//export_to_json("pretrained-model.json");
-export_inputs_to_json("sample_grayscales.json");
+learn(20);
+export_to_json("pretrained-model.json");
+//export_inputs_to_json("sample_grayscales.json");
